@@ -1,0 +1,148 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>1mHero.sikuli</h2> <a href="1mHero.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">def</span> openBox ():
+    <span class="kw">if</span> exists(<img src="findBoxs.png" />):
+        boxs = findAll(<img src="findBoxs.png" />)
+
+        <span class="kw">for</span> box <span class="kw">in</span> boxs:
+            <span class="skw">click</span>(box)
+
+
+<span class="kw">def</span> doneBoxScene():
+    <span class="skw">click</span>(<img src="ok.png" />)
+
+<span class="kw">def</span> checkElseDoneScene():
+    <span class="kw">if</span> exists(<img src="elseDone.png" />):
+        <span class="skw">click</span>(<img src="elseDoneOk-1.png" />)
+        <span class="skw">sleep</span>(<span class="dig">1</span>)
+        checkElseDoneScene()
+
+<span class="kw">def</span> sellItems():
+    <span class="skw">click</span>(<img src="boxFullYes.png" />)
+
+    <span class="kw">if</span> exists(<img src="sellItem1.png" />):
+        items = findAll(<img src="sellItem1.png" />)
+
+        <span class="kw">for</span> item <span class="kw">in</span> items:
+            <span class="skw">click</span>(item)
+
+    <span class="kw">if</span> exists(<img src="sellItem2.png" />):
+        items = findAll(<img src="sellItem2-1.png" />)
+
+        <span class="kw">for</span> item <span class="kw">in</span> items:
+            <span class="skw">click</span>(item)
+
+    <span class="cmt">#網路延遲準備時間</span>
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    <span class="skw">click</span>(<img src="sellItemsButton.png" />)
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+    <span class="skw">click</span>(<img src="doneSell.png" />)
+
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    <span class="cmt">#backToReplay</span>
+    <span class="skw">click</span>(Pattern(<img src="backReplay.png" />).targetOffset(-<span class="dig">55</span>,-<span class="dig">2</span>))
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    replayGame()
+
+<span class="kw">def</span> replayGame():
+    <span class="kw">if</span> exists(<img src="levelup.png" />):
+        <span class="skw">click</span>(<img src="levelup.png" />)
+
+    <span class="skw">click</span>(<img src="replayGame.png" />)
+    <span class="cmt"># check box full</span>
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+    <span class="kw">if</span> exists(<img src="boxFull-1.png" />):
+        sellItems()
+
+    <span class="cmt"># no life and sleep</span>
+
+
+<span class="kw">def</span> startGame():
+    <span class="skw">click</span>(<img src="startGame.png" />)
+    <span class="cmt">#sleep(3 * 60 * 5)</span>
+    <span class="skw">sleep</span>(<span class="dig">60</span>)
+
+<span class="kw">while</span> <span class="dig">1</span>:
+    startGame()
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    openBox()
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    doneBoxScene()
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    checkElseDoneScene()
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+    replayGame()
+    <span class="skw">sleep</span>(<span class="dig">5</span>)
+</pre>
+</body>
+</html>
